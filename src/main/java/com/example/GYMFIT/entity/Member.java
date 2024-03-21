@@ -35,7 +35,7 @@ public class Member {
 
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
-
+// 수정작업
     public static Member createMember(MemberFormDto memberFormDto){
         Member member = new Member();
         member.setMemNm(memberFormDto.getMemNm());
