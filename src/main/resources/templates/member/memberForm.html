@@ -38,8 +38,15 @@
             <p th:if="${#fields.hasErrors('memAdr')}"
                th:errors="*{memAdr}" class="fieldError">부적절한 데이터</p>
         </div>
-        <div style="text-align:center">
-            <button type="submit" class="btn btn-primary">제출</button>
+
+        <div >
+            <button th:formaction="@{/members/new}"
+                    type="submit" class="btn btn-primary">저장</button>
+        </div>
+
+        <div >
+            <button th:formaction="@{'/members/member/'+ ${memberFormDto.memId}}"
+                    type="submit" class="btn btn-primary">수정</button>
         </div>
 <!--        <input type="hidden"-->
 <!--               th:name="${_csrf.parameterName}"-->

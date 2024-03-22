@@ -46,4 +46,13 @@ public class Member {
         return member;
     }
 
+    public void updateMember(MemberFormDto memberFormDto){
+        this.memNm = memberFormDto.getMemNm();
+        this.memBirthDt = memberFormDto.getMemBirthDt();
+        this.memCno = memberFormDto.getMemCno();
+        this.memAdr = memberFormDto.getMemAdr();
+        this.memEmlAdr = memberFormDto.getMemEmlAdr();
+
+    }
+
 }
