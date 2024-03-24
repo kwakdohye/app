@@ -9,33 +9,30 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "member")
 @Table(name="member")
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memId; //회원 ID
-    @Column
+    @Column(nullable = false)
     private String memNm; //회원 이름
-    @Column
+    @Column(nullable = false)
     private String memBirthDt; //회원 출생일자
-    @Column
+    @Column(nullable = false, name="memCno")
     private String memCno; //회원 연락처
-    @Column
+    @Column(nullable = false)
     private String memAdr; //회원 주소
-    @Column
+    @Column(nullable = false)
     private String memEmlAdr; //회원 Email 주소
-    @Column
+
     private LocalDateTime memRgtDt; //회원 등록일자
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-//    수정
     public static Member createMember(MemberFormDto memberFormDto){
         Member member = new Member();
         member.setMemNm(memberFormDto.getMemNm());

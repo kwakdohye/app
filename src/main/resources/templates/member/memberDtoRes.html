@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+
+
+</head>
+<div layout:fragment="content">
+    <input type="hidden" id="memId" th:value="${member.memId}">
+    <div class="d-flex">
+
+        <div class="wd50">
+
+            <div class="h4" th:text="${member.memNm}">
+                회원이름
+            </div>
+            <hr class="my-4">
+            <div>
+                <div class="h4 text-danger text-left">
+                    <input type="hidden" th:value="${member.memBirthDt}" id="memBirthDt" name="memBirthDt">
+                    <span th:text="${member.memBirthDt}"></span>:생년월일
+                </div>
+            </div>
+            <hr class="my-4">
+            <div>
+                <div class="h4 text-danger text-left">
+                    <input type="hidden" th:value="${member.memCno}" id="memCno" name="memCno">
+                    <span th:text="${member.memCno}"></span>:전화번호
+                </div>
+            </div>
+            <hr class="my-4">
+
+            <div>
+                <div class="h4 text-danger text-left">
+                    <input type="hidden" th:value="${member.memAdr}" id="memAdr" name="memAdr">
+                    <span th:text="${member.memAdr}"></span>:주소
+                </div>
+            </div>
+            <hr class="my-4">
+            <div>
+                <div class="h4 text-danger text-left">
+                    <input type="hidden" th:value="${member.memEmlAdr}" id="memEmlAdr" name="memEmlAdr">
+                    <span th:text="${member.memEmlAdr}"></span>:Email 주소
+                </div>
+            </div>
+            <hr class="my-4">
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+</html>

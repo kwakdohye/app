@@ -11,11 +11,8 @@ import org.modelmapper.ModelMapper;
 @Getter
 @Setter
 
-@Data    //2차시도 성공!  (24.03.06)
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)  //2차시도 성공! (24.03.06)
-
 public class MemberFormDto {
-    private  Long memId;
+    private Long memId;
     private String memNm;
     private String memBirthDt;
     private String memCno;
