@@ -1,6 +1,7 @@
 package com.example.GYMFIT.controller;
 
 
+import com.example.GYMFIT.dto.MainMemberDto;
 import com.example.GYMFIT.dto.MemberFormDto;
 import com.example.GYMFIT.dto.MemberSearchDto;
 import com.example.GYMFIT.entity.Member;
@@ -17,6 +18,7 @@ import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -108,7 +110,8 @@ public class MemberController {
 //    public String memMain(MemberSearchDto memberSearchDto,
 //                            @PathVariable("page")Optional<Integer>page,
 //                            Model model){
-//        //page 당 출력할 페이지수 조절을 이곳입니다!!                              //pageSize 에서 갯수조절!
+//
+// //page 당 출력할 페이지수 조절을 이곳입니다!!                                 pageSize 에서 갯수조절!
 //        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
 //        Page<MainMemberDto> members = memberService.getMainMemberPage(memberSearchDto, pageable);
 //
@@ -117,4 +120,6 @@ public class MemberController {
 //        model.addAttribute("maxPage",5);
 //        return"main";
 //    }
+
+
 }

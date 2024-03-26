@@ -27,11 +27,10 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
 
     private BooleanExpression searchByLike(String searchBy, String searchQuery){
         if(StringUtils.equals("memNm", searchBy)){
-            return QMember.member.memNm.like("%"+searchQuery+"%");  //QItem.item.itemNm.like("%"+searchQuery+"%");
+            return QMember.member.memNm.like("%"+searchQuery+"%");
+        } else if (StringUtils.equals("memCno", searchBy)) {
+           return QMember.member.memCno.like("%"+searchQuery+"%");
         }
-//        else if (StringUtils.equals("createdBy", searchBy)) {
-//           return QMember.member.
-//        }
         return null;
     }
 
@@ -39,8 +38,10 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
     @Override
     public Page<Member> getAdminMemberPage(MemberSearchDto memberSearchDto, Pageable pageable) {
         List<Member> content =jpaQueryFactory.selectFrom(QMember.member)
+
                 .where(searchByLike(memberSearchDto.getSearchBy(),
                         memberSearchDto.getSearchQuery()))
+
                 .orderBy(QMember.member.memId.desc())
                 .offset(pageable.getOffset()) // 데이터를 가지고 올 시작 인덱스
                 .limit(pageable.getPageSize()) // 한번에 조회할 limit(최대 개수)
@@ -59,6 +60,10 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
         return StringUtils.isEmpty(searchQuery) ? null : QMember.member.memNm.like( "%"+searchQuery+"%");
     }
 
+    private BooleanExpression memCnoLike(String searchQuery){
+        return StringUtils.isEmpty(searchQuery) ? null : QMember.member.memCno.like( "%"+searchQuery+"%");
+    }
+
     @Override
     public Page<MainMemberDto> getMainMemberPage(MemberSearchDto memberSearchDto, Pageable pageable) {
         QMember member = QMember.member;
@@ -68,6 +73,7 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
                         member.memEmlAdr, member.memBirthDt))
                 .from(member).join(member)
                 .where(memNmLike(memberSearchDto.getSearchQuery()))
+                .where(memCnoLike(memberSearchDto.getSearchQuery()))
                 .orderBy(member.memId.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -75,6 +81,7 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
         long total = jpaQueryFactory.select(Wildcard.count)
                 .from(member).join(member)
                 .where(memNmLike(memberSearchDto.getSearchQuery()))
+                .where(memCnoLike(memberSearchDto.getSearchQuery()))
                 .fetchOne();
 
         return new PageImpl<>(content, pageable, total);

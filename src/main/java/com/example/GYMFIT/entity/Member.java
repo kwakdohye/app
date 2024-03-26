@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Member extends BaseEntity{
+public class Member {
 
     @Id
     @Column(name = "member_id")
@@ -31,7 +31,8 @@ public class Member extends BaseEntity{
     @Column(nullable = false)
     private String memEmlAdr; //회원 Email 주소
 
-    private LocalDateTime memRgtDt; //회원 등록일자
+    @Column
+    private String memRgtDt; //회원 등록일자
 
     public static Member createMember(MemberFormDto memberFormDto){
         Member member = new Member();
@@ -51,5 +52,6 @@ public class Member extends BaseEntity{
         this.memEmlAdr = memberFormDto.getMemEmlAdr();
 
     }
+
 
 }

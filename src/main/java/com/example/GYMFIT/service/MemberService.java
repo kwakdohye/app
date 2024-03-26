@@ -51,16 +51,19 @@ public class MemberService {
         return member.getMemId();
     }
 
+    @Transactional(readOnly = true) // 회원정보 특정조회
+    public Page<Member> getAdminMemberPage(MemberSearchDto memberSearchDto,
+                                           Pageable pageable){
+        return memberRepository.getAdminMemberPage(memberSearchDto, pageable);
+    }
+
     @Transactional(readOnly = true)  // 메인에서 전체 회원정보 조회하기
     public Page<MainMemberDto> getMainMemberPage(MemberSearchDto memberSearchDto,
                                                  Pageable pageable){
         return memberRepository.getMainMemberPage(memberSearchDto, pageable);
     }
 
-    @Transactional(readOnly = true) // 회원정보 특정조회
-    public Page<Member> getAdminMemberPage(MemberSearchDto memberSearchDto,
-                                           Pageable pageable){
-        return memberRepository.getAdminMemberPage(memberSearchDto, pageable);
-    }
+
+
 
 }

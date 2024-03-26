@@ -12,13 +12,11 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member,Long>,
         QuerydslPredicateExecutor<Member>, MemberRepositoryCustom {
 
-    List<Member> findByMemId(Long memId);
-
     List<Member> findByMemCno(String memCno);
 
     List<Member> findByMemNmAndMemCno(String memNm, String memCno);
 
-  @Query("SELECT m FROM member m WHERE m.memNm Like %:memNm% ORDER BY  m.memCno desc")
+    @Query("SELECT m FROM member m WHERE m.memNm Like %:memNm% ORDER BY  m.memCno desc")
     List<Member> findByMemNm(@Param("memNm") String memNm);
 
 }

@@ -18,6 +18,7 @@ public class MemberFormDto {
     private String memCno;
     private String memAdr;
     private String memEmlAdr;
+    private String memRgtDt;
 
     private static ModelMapper modelMapper = new ModelMapper();
     public Member createMember(){

@@ -2,23 +2,26 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
+      layout:decorate="~{layout/layout1}">
 
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function(){
-            $("searchBtn").on("click", function(e){
+        /*
+            $("#searchBtn").on("click", function(e){
                 e.preventDefault();
                 page(0);
             });
+            */
         });
         function page(page){
             var searchBy = $("#searchBy").val();
             var searchQuery = $("#searchQuery").val();
 
-            location.href = "/members/" + page +
+            location.href = "/members/members/" + page +
                                "&searchBy=" + searchBy +
-                               "&searchQuery=" + searchQuery;
+                               "&searchQuery=" + searchQuery +
+                               "&test=true";
 
 
         }
@@ -26,8 +29,6 @@
 </th:block>
 
 <div layout:fragment="content">
-    <form th:action="@{'/members/'+${members.number}}"
-          role="form" method="get" th:object="${members}">
         <table class="table">
             <thead>
             <tr>
@@ -51,6 +52,8 @@
             </tr>
             </tbody>
         </table>
+    <form th:action="@{'members'}"
+          method="get" th:object="${memberSearchDto}">
 
         <div th:with="start=${(members.number/maxPage)*maxPage+1},
 end=(
@@ -79,15 +82,15 @@ ${(members.totalPages == 0) ? 1:
             </ul>
         </div>
 
-        <div class="form-inline justify-content-center" th:object="${memberSearchDto}">
-
+        <div class="form-inline justify-content-center">
             <select th:field="*{searchBy}" class="form-control" style="width:auto">
-                <option value="memberNm">회원이름</option>
+                <option value="memNm">회원이름</option>
                 <option value="memCno">전화번호</option>
             </select>
             <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력하세요"/>
             <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
         </div>
+
     </form>
 </div>
 
