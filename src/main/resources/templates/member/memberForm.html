@@ -4,17 +4,17 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{member/layout/layout}">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>members_new</title>
+<!--    <meta charset="utf-8">-->
+<!--    <meta content="width=device-width, initial-scale=1" name="viewport">-->
+<!--    <title>members_new</title>-->
 
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
-    <link href="https://getbootstrap.kr/docs/5.3/examples/checkout/" rel="canonical">
-    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+<!--    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"-->
+<!--          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">-->
+<!--    <link href="https://getbootstrap.kr/docs/5.3/examples/checkout/" rel="canonical">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">-->
 
-    <meta content="#712cf9" name="theme-color">
-    <link href="/css/memberForm.css" rel="stylesheet">
+<!--    <meta content="#712cf9" name="theme-color">-->
+<!--    <link href="/css/memberForm.css" rel="stylesheet">-->
 
 </head>
 
@@ -34,7 +34,7 @@
 
 
             <!--        <div class="row g-5">-->
-            <div class="col-md-7 col-lg-8">
+            <div class="col-lg-8">
                 <!--                <h4 class="mb-3">//</h4>-->
                 <form action="/members/admin/new" class="needs-validation" method="POST" th:object="${memberFormDto}">
 
@@ -147,7 +147,7 @@
                             </button> -->
                             <!--<button th:formaction="@{/members/admin/new}" type="submit" class="btn btn-primary">저장</button>-->
                             <button class="w-100 btn btn-primary btn-lg" th:formaction="@{/members/admin/new}"
-                                    type="button" id="liveToastBtn" >Register
+                                    type="submit" id="liveToastBtn">Register
                             </button>
 
                             <!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> -->
