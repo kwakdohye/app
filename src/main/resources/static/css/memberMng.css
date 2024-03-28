@@ -12,7 +12,7 @@
 } */
 
 .card {
-    margin: auto;
+    margin: 20px;
     padding: 5px;
     margin-bottom: 50px;
 }
@@ -72,6 +72,7 @@ a {
 .row {
     margin: 50px;
     padding-top: 100px;
+    justify-content: space-between;
 }
 .mb-3 {
     background: white;
@@ -80,4 +81,10 @@ a {
 }
 .btn-light {
     border: 1px solid rgba(128, 128, 128, 0.418);
+}
+li {
+    list-style: none;
+}
+.container {
+    display: flex;
 }
