@@ -1,10 +1,8 @@
 package com.example.GYMFIT.dto;
 
 import com.example.GYMFIT.entity.Facility;
-import com.example.GYMFIT.entity.MemFac;
 import lombok.Getter;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 

@@ -85,7 +85,6 @@ public class MemberController {
 
     @PostMapping("/admin/member/{memId}")  //내용 수정을 위해서 한명씩 조회하고 수정한 내용 post 하기
     public String updateMember(@Valid MemberFormDto memberFormDto,
-                               @PathVariable("facilityId") Long facilityId,
                                BindingResult bindingResult,
                                Model model){
         if(bindingResult.hasErrors()){
@@ -93,6 +92,7 @@ public class MemberController {
             return "/member/memberForm";
         }
         try{
+            memberService.updateMember(memberFormDto);
             return"redirect:/members/members";
         }catch (Exception e){
             model.addAttribute("errorMessage","Exception 발생");
@@ -130,6 +130,7 @@ public class MemberController {
     public String memManage(MemberSearchDto memberSearchDto,
                             @PathVariable("page")Optional<Integer>page,
                             Model model){
+
         //page 당 출력할 페이지수 조절을 이곳입니다!!                              //pageSize 에서 갯수조절!
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
         Page<Member> members = memberService.getAdminMemberPage(memberSearchDto, pageable);

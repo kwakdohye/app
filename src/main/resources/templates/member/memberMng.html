@@ -50,8 +50,10 @@
                 <td th:text="${member.memCno}" ></td>
                 <td th:text="${member.memAdr}" ></td>
                 <td th:text="${member.memEmlAdr}" ></td>
-                <td><a th:href="'/members/member/'+${member.memId}"
-                       th:text="${member.facilityId}"></a></td>
+                <td>
+                    <a th:href="'/members/member/'+${member.memId}"
+                       th:text="${member.facilityId}"></a>
+                </td>
             </tr>
             </tbody>
         </table>

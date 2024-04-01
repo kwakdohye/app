@@ -38,20 +38,20 @@ public class Member {
     @Column(nullable = false)
     private String memEmlAdr; //회원 Email 주소
 
-    @Column
-    private String memRgtDt; //회원 등록일자
-
-    @Column
-    private Long facilityClCd; //이용권 코드
-
-    @Column
-    private String facilityNm; // 이용권 이름
-
-    @Column
-    private int facilityPrice; // 이용권 가격
-
-    @Column
-    private String facilityTerm; //이용 기간
+//    @Column
+//    private String memRgtDt; //회원 등록일자
+//
+//    @Column
+//    private Long facilityClCd; //이용권 코드
+//
+//    @Column
+//    private String facilityNm; // 이용권 이름
+//
+//    @Column
+//    private int facilityPrice; // 이용권 가격
+//
+//    @Column
+//    private String facilityTerm; //이용 기간
 
 
 
