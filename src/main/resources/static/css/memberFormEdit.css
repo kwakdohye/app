@@ -1,9 +1,15 @@
-html,
-body {
-  height: 100%;
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
-.container{
+.container_dk{
     max-width: 700px;
+    adding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 form img {
     padding-bottom: 50px;
@@ -37,7 +43,7 @@ form img {
   user-select: none;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
@@ -45,7 +51,7 @@ form img {
     width: 100%;
   }
 }
-
+*/
 
 
 /* .b-example-divider {
