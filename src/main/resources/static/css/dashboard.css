@@ -54,11 +54,11 @@
   border: 1px solid gray;
 }
 a.page-link {
-  color: #0000FF;
+  color: #323070;
   font-weight: 500;
 }
 a.page-link:hover {
-  color: #0000FF;
+  color: #323070;
   font-weight: 800;
 }
 .row {
@@ -83,16 +83,16 @@ a:hover {
     text-decoration: none;
 }
 th, td {
-    color: #0000FF;
+    color: #323070;
 }
 form {
     padding-top: 10px;
 }
 h1.h2 {
-    color: #0000FF;
+    color: #BF1E2E;
 }
 h2 {
-    color: #0000FF;
+    color: #BF1E2E;
 }
 .btn-toolbar {
 
