@@ -18,11 +18,12 @@ spec:
           image: gymfit/dev-gitaction-demo:latest
           ports:
             - containerPort: 8081
+          resources:
+            requests:
+              cpu: "100m"   # CPU 요청을 100m (0.1 CPU)로 설정
       imagePullSecrets:
         - name: dockerhub-secret
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
