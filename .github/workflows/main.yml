@@ -58,15 +58,13 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/dev-gitaction-demo:latest
             
       - name: Notify Slack on Build Status (Develop)
-        if: always()  # 빌드 상태와 관계없이 항상 실행되도록 설정
+        if: success()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: infra_taam
+          author_name: 인프라_김수진
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
-          message: |
-            🚀 *Development Environment* Build and Push Docker Image ${{ job.status }}! @인프라_김수진(관리자) @개발_정건영
-            Build URL: ${{ job.status == 'success' && steps.deploy.outputs.url }}  # 성공 시 빌드 URL 제공
+          message: 🚀 *Production Environment* Build and Push Docker Image succeeded!
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
      
@@ -114,6 +112,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
+          author_name: 인프라_김수진
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
           message: 🚀 *Production Environment* Build and Push Docker Image succeeded!
         env:
