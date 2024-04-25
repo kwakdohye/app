@@ -21,6 +21,9 @@ spec:
           resources:
             requests:
               cpu: "100m"   # CPU 요청을 100m (0.1 CPU)로 설정
+            limits:
+              cpu: "150m"   # CPU 제한을 200m (0.2 CPU)로 설정
+              memory: "256Mi"  # 메모리 제한을 256Mi로 설정
       imagePullSecrets:
         - name: dockerhub-secret
 ---
