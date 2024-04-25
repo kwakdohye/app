@@ -4,6 +4,7 @@ on:
     branches:
       - develop
       - main
+      
 permissions:
   contents: read    
 
@@ -61,8 +62,9 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
+          author_name: infra_taam
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
-          message: 🚀 *Development Environment* Build and Push Docker Image succeeded!
+          message: 🚀 *Development Environment* Build and Push Docker Image succeeded! @인프라_김수진(관리자) @개발_정건영
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
      
