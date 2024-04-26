@@ -53,18 +53,18 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:${{ github.run_number }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:latest
-          
+
       - name: Push Docker image for green
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:${{ github.run_number }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:latest
-            
-      - name: Notify Slack on Build Status (Develop)
+          
+      - name: Notify Slack on Build Status
         if: failure()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: 인프라_김수진
+          author_name: 운영_빌드
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
           message: 🚀 *Production Environment* Build and Push Docker Image succeeded!
         env:
