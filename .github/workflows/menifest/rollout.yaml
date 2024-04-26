@@ -27,12 +27,6 @@ spec:
           requests:
             cpu: "100m"
             memory: "265Mi"
-        startupProbe:
-          httpGet:
-            path: /actuator/health
-            port: liveness-port
-          failureThreshold: 6
-          periodSeconds: 20
   strategy:
     blueGreen: 
       activeService: rollout-bluegreen-active
