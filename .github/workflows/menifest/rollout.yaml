@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: gymfit/rollouts-demo:blue
-        #image: gymfit/rollouts-demo:green
+        image: gymfit/rollouts-demo-blue:latest
+        #image: gymfit/rollouts-demo-green:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 8081
