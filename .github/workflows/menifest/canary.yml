@@ -1,0 +1,63 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollout-canary
+spec:
+  replicas: 5
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollout-canary
+  template:
+    metadata:
+      labels:
+        app: rollout-canary
+    spec:
+      containers:
+      - name: rollouts-demo
+        image: gymfit/rollouts-demo-canary:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8081
+        resources:
+          limits:
+            cpu: "150m"
+            memory: "265Mi"
+          requests:
+            cpu: "100m"
+            memory: "265Mi"
+  strategy:
+    canary: 
+      steps:
+      - setWeight: 10
+        pause: 
+          duration: 30s
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rollout-canary-active
+spec:
+  type: NodePort
+  selector:
+    app: rollout-canary
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8081
+    nodePort: 30090
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rollout-canary-preview
+spec:
+  type: NodePort
+  selector:
+    app: rollout-canary
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8081
+    nodePort: 30091
