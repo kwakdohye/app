@@ -40,8 +40,8 @@ jobs:
       - name: Build Docker image for blue
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:blue .
         
-      #- name: Build Docker image for green
-        #run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:green .
+      - name: Build Docker image for green
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:green .
       
       - name: Log in to DockerHub
         uses: docker/login-action@v2
