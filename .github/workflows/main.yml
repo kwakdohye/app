@@ -38,7 +38,7 @@ jobs:
           mysql-host: 'db-nlb-839be03d4ed59630.elb.ap-south-1.amazonaws.com' 
       
       - name: Build Docker image for blue
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:blue .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue .
         
       - name: Build Docker image for green
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green .
@@ -50,10 +50,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       - name: Push Docker image for blue
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:${{githb.run_number}}
-             docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:latest
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:${{ github.run_number }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:latest
+          
       - name: Push Docker image for green
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:green
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:${{ github.run_number }}
+             docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:latest
             
       - name: Notify Slack on Build Status (Develop)
         if: failure()
