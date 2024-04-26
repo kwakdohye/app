@@ -1,9 +1,9 @@
 name: Build and Push Docker Image
+
 on:
   push:
     branches:
       - develop
-      - main
       
 permissions:
   contents: read    
@@ -38,77 +38,26 @@ jobs:
           mysql-password: '!skrktkzlWkaQhd123'
           mysql-host: 'db-nlb-839be03d4ed59630.elb.ap-south-1.amazonaws.com' 
       
-      - name: Build Docker image for develop
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo .
-
-      - name: Log in to DockerHub for develop
+      - name: Build Docker image for blue
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:blue .
+        
+      #- name: Build Docker image for green
+        #run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:green .
+      
+      - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-      - name: Build and push Docker images for develop
-        uses: docker/build-push-action@v3.0.0
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/dev-gitaction-demo:${{ github.run_number }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/dev-gitaction-demo:latest
+      - name: Push Docker image for blue
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:blue
+        
+      - name: Push Docker image for green
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:green
             
       - name: Notify Slack on Build Status (Develop)
-        if: success()
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: 인프라_김수진
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
-          message: 🚀 *Production Environment* Build and Push Docker Image succeeded!
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-     
-  build_and_push_production:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-    
-      - name: Grant execute permission for Gradlew
-        run: chmod +x ./gradlew
-    
-      - name: Build JAR file with Gradle
-        run: ./gradlew build
-      
-      - name: Build Docker image for production
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo .
-
-      - name: Log in to DockerHub for production
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
-      - name: Build and push Docker images for production
-        uses: docker/build-push-action@v3.0.0
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/prd-gitaction-demo:${{ github.run_number }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/prd-gitaction-demo:latest
-
-      - name: Notify Slack on Build Success (Production)
-        if: success()
+        if: failure()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
