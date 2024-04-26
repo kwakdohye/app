@@ -55,8 +55,9 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-blue:latest
           
       - name: Push Docker image for green
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:${{ github.run_number }}
-             docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:latest
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:${{ github.run_number }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo-green:latest
             
       - name: Notify Slack on Build Status (Develop)
         if: failure()
