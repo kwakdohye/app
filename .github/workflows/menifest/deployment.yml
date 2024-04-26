@@ -1,62 +1,69 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
-  name: app-development
-  labels:
-    app: app-development
+  name: rollout-bluegreen
 spec:
+  replicas: 2
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: app-development
+      app: rollout-bluegreen
   template:
     metadata:
       labels:
-        app: app-development
+        app: rollout-bluegreen
     spec:
       containers:
-        - name: app-container
-          image: gymfit/dev-gitaction-demo:latest
-          ports:
-            - containerPort: 8081
-          resources:
-            requests:
-              cpu: "100m"   # CPU 요청을 100m (0.1 CPU)로 설정
-            limits:
-              cpu: "150m"   # CPU 제한을 200m (0.2 CPU)로 설정
-              memory: "256Mi"  # 메모리 제한을 256Mi로 설정
-      imagePullSecrets:
-        - name: dockerhub-secret
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-service-development
-spec:
-  type: NodePort
-  selector:
-    app: app-development
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8081
-      nodePort: 30090
+      - name: rollouts-demo
+        image: gymfit/rollouts-demo:blue
+        #image: gymfit/rollouts-demo:green
+        imagePullPolicy: Always
+        ports:
+          - name: liveness-port
+            containerPort: 8081
+        resources:
+          limits:
+            cpu: "4"
+            memory: "16Gi"
+          requests:
+            cpu: "4"
+            memory: "16Gi"
+        startupProbe:
+          httpGet:
+            path: /actuator/health
+            port: liveness-port
+          failureThreshold: 6
+          periodSeconds: 20
+  strategy:
+    blueGreen: 
+      activeService: rollout-bluegreen-active
+      previewService: rollout-bluegreen-preview
+      autoPromotionEnabled: false
 
 ---
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
+kind: Service
+apiVersion: v1
 metadata:
-  name: app-autoscaler-development
+  name: rollout-bluegreen-active
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: app-development
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
+  selector:
+    app: rollout-bluegreen
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8081
+    nodePort: 30090
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rollout-bluegreen-preview
+spec:
+  selector:
+    app: rollout-bluegreen
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8081
+    nodePort: 30091
