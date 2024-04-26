@@ -1,5 +1,4 @@
 name: Build and Push Docker Image
-
 on:
   push:
     branches:
@@ -9,10 +8,10 @@ permissions:
   contents: read    
 
 jobs:
-  build_and_push_develop:
-    if: github.ref == 'refs/heads/develop'
+  build_and_push_production:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
