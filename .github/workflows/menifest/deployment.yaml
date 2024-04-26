@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: rollout-bluegreen
+  app: app-development
 spec:
   replicas: 2
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: rollout-bluegreen
+      app: app-development
   template:
     metadata:
       labels:
-        app: rollout-bluegreen
+        app: app-development
     spec:
       containers:
       - name: rollouts-demo
@@ -23,11 +23,11 @@ spec:
             containerPort: 8081
         resources:
           limits:
-            cpu: "4"
-            memory: "16Gi"
+            cpu: "150m"
+            memory: "265Mi"
           requests:
-            cpu: "4"
-            memory: "16Gi"
+            cpu: "100m"
+            memory: "265Mi"
         startupProbe:
           httpGet:
             path: /actuator/health
@@ -47,7 +47,7 @@ metadata:
   name: rollout-bluegreen-active
 spec:
   selector:
-    app: rollout-bluegreen
+    app: app: app-development
   ports:
   - protocol: TCP
     port: 80
@@ -61,7 +61,7 @@ metadata:
   name: rollout-bluegreen-preview
 spec:
   selector:
-    app: rollout-bluegreen
+    app: app: app-development
   ports:
   - protocol: TCP
     port: 80
