@@ -48,12 +48,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Deploy to Kubernetes using Argo Rollouts
-        uses: docker://argoproj/argo-rollouts:v1.1.0
-        with:
-          args: 'rollouts set image rollout rollouts-demo-new=${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:${{ github.run_number }}'
-          
+        
       - name: Notify Slack on Build Status
         if: failure()
         uses: 8398a7/action-slack@v3
