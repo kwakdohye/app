@@ -37,7 +37,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: rollout-canary-active
+  name: rollout-canary
 spec:
   type: NodePort
   selector:
