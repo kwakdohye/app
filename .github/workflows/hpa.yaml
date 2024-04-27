@@ -6,7 +6,7 @@ spec:
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
-    name: rollout-canary  # 카나리 배포에 대한 롤아웃의 이름으로 수정
+    name: rollout-canary
   minReplicas: 1
   maxReplicas: 10
   metrics:
