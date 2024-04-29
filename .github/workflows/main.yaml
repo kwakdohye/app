@@ -32,10 +32,10 @@ jobs:
         uses: samin/mysql-action@v1
         with:
           mysql-version: '8.0'
-          mysql-database: 'db'
-          mysql-user: 'root'
-          mysql-password: '!skrktkzlWkaQhd123'
-          mysql-host: 'db-nlb-839be03d4ed59630.elb.ap-south-1.amazonaws.com'
+          mysql-database: ${{ secrets.DMYSQL_DATABASE }}
+          mysql-user: ${{ secrets.MYSQL_USER }}
+          mysql-password: ${{ secrets.MYSQL_PASSWORD }}
+          mysql-host: ${{ secrets.MYSQL_HOST }}
       
       - name: Build Docker image
         run: |
@@ -51,7 +51,7 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:${{ github.run_number }} && docker push ${{ secrets.DOCKERHUB_USERNAME }}/rollouts-demo:latest
         
       - name: Notify Slack on Build Status
-        if: failure()
+        if: always()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
