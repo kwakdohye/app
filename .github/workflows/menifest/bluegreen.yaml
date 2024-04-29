@@ -21,11 +21,9 @@ spec:
           - containerPort: 8081
         resources:
           limits:
-            cpu: "150m"
-            memory: "265Mi"
+            cpu: "350m"
           requests:
-            cpu: "100m"
-            memory: "265Mi"
+            cpu: "350m"
   strategy:
     blueGreen: 
       activeService: rollout-bluegreen-active
