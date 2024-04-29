@@ -2,14 +2,14 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - stage
+      - staging
       
 permissions:
   contents: read    
 
 jobs:
   build_and_push_staging:
-    if: github.ref == 'refs/heads/stage'
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
 
     steps:
