@@ -60,8 +60,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: 운영_빌드
+          author_name: 🚀main build
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
-          message: 🚀 *Production Environment* Build and Push Docker Image succeeded!
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
