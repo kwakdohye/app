@@ -26,8 +26,8 @@ spec:
             cpu: "500m"
   strategy:
     blueGreen: 
-      activeService: rollout-bluegreen-active
-      previewService: rollout-bluegreen-preview
+      activeService: rollout-bluegreen-active-stg
+      previewService: rollout-bluegreen-preview-stg
       autoPromotionEnabled: false
 
 ---
