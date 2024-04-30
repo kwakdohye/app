@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: rollout-bluegreen
+  name: rollout-bluegreen-stg
 spec:
   revisionHistoryLimit: 2
   selector:
