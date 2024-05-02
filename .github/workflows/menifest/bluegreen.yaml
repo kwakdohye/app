@@ -43,7 +43,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 8081
-    nodePort: 30090
+    nodePort: 30092
 
 ---
 kind: Service
@@ -58,4 +58,4 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 8081
-    nodePort: 30091
+    nodePort: 30093
