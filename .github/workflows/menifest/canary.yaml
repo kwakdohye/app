@@ -3,6 +3,7 @@ kind: Rollout
 metadata:
   name: rollout-canary
 spec:
+  replicas: 8
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -18,11 +19,6 @@ spec:
         imagePullPolicy: Always
         ports:
           - containerPort: 8081
-        resources:
-          limits:
-            cpu: "500m"
-          requests:
-            cpu: "500m"
   strategy:
     canary:
       maxSurge: "25%"
